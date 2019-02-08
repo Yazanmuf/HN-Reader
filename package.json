@@ -1,6 +1,10 @@
 {
   "name": "hn-reader",
   "version": "0.0.1",
+  "contributors": [
+    "Mohamed M",
+    "Yazan M"
+  ],
   "description": "hacker news reader",
   "main": "index.js",
   "scripts": {
