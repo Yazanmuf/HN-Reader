@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
 
-const list = [
-    {
-        title: 'React',
-        author: 'Jordan Walke',
-    }
-]
-
 class App extends Component {
     constructor(props) {
         super(props);
 
 
         this.state = {
-            list: list,
+            userList: [],
         };
     }
+    componentDidMount() {
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(users => {
+                this.setState({ userList: users });
+            });
 
+    }
 
     render() {
         return (
             <div className="App">
-                {this.state.list.map(item =>
+                {this.state.userList.map(user =>
                     <div>
-                        <span>{item.title}</span>
+                        <span>{user.name}</span><br />
+                        <span>{user.email}</span><br /><br />
                     </div>
                 )}
 
