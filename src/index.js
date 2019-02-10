@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './containers/app';
 
 const title = 'HN Reader';
 
 ReactDOM.render(
-<div>{title}</div>,
-document.getElementById('app')
+    <App />,
+    document.getElementById('app')
 );
 
 module.hot.accept();
