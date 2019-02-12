@@ -9,15 +9,16 @@ class App extends Component {
 
         this.state = {
             id: [],
-            title: []
+            title: [],
+            storyList: [],
         };
     }
     componentDidMount() {
-        // fetch('https://hacker-news.firebaseio.com/v0/jobstories.json?print=pretty')
-        //     .then(response => response.json())
-        //     .then(stories => {
-        //         this.setState({ storyList: stories });
-        //     });
+        fetch('https://hacker-news.firebaseio.com/v0/jobstories.json?print=pretty')
+            .then(response => response.json())
+            .then(stories => {
+                this.setState({ storyList: stories });
+            });
         const storyId = 19143064
 
         fetch(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json?print=pretty`)
