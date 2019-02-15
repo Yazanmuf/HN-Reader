@@ -6,7 +6,7 @@ class App extends Component {
 
         this.state = {
             storyList: [],
-            storyObjects: [],
+            // storyObjects: [],
         };
     }
 
@@ -24,25 +24,23 @@ class App extends Component {
     }
 
     render() {
-        const newStoryObjectList = []
+        let newStoryObjectList = []
         this.state.storyList.slice(0, 10).map(
             (id, n) => {
                 fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
-                    .then(response => {
-                        response.json();
-                        // I can see the returned promise when I console log the response here. Why is it undefined in the next step?
-                    })
-                    .then(data => {
-                        newStoryObjectList[n] = data;
-                        console.log('Data goes here', id, data)
-                    })
-                    ;
+                    .then(response => response.json())
+                    .then(data => newStoryObjectList.push(data));
             })
+        console.log(newStoryObjectList)
 
         return (
             <div >
                 <ul>
-                    {/* {storyObjects} */}
+                    {newStoryObjectList.map((story) =>
+                        <li key={story.id}>
+                            {post.title}
+                        </li>
+                    )}
                 </ul>
             </div >
         )
