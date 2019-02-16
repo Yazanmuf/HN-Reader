@@ -1,44 +1,30 @@
 import React, { Component } from 'react';
+import * as API from '../api';
 
 class App extends Component {
+
     constructor(props) {
         super(props);
 
         this.state = {
-            storyList: [],
-            // storyObjects: [],
+            stories: []
         };
     }
 
     componentDidMount() {
-        const { storyList } = this.state;
-        fetch('https://hacker-news.firebaseio.com/v0/jobstories.json?print=pretty')
-            .then(response => response.json())
-            .then(stories => {
-                this.setState({ storyList: stories });
-            });
-        console.log('componentDidMount phase complete', storyList)
-
-
-
+        API.fetchTopStoryIds(10)
+            .then(ids => API.fetchStories(ids))
+            .then(stories => this.setState({stories}));
     }
 
     render() {
-        let newStoryObjectList = []
-        this.state.storyList.slice(0, 10).map(
-            (id, n) => {
-                fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
-                    .then(response => response.json())
-                    .then(data => newStoryObjectList.push(data));
-            })
-        console.log(newStoryObjectList)
 
         return (
             <div >
                 <ul>
-                    {newStoryObjectList.map((story) =>
+                    {this.state.stories.map((story) =>
                         <li key={story.id}>
-                            {post.title}
+                            {story.title}
                         </li>
                     )}
                 </ul>
