@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as API from '../api';
+import StoryView from './StoryView';
 
 class App extends Component {
 
@@ -14,19 +15,26 @@ class App extends Component {
     componentDidMount() {
         API.fetchTopStoryIds(10)
             .then(ids => API.fetchStories(ids))
-            .then(stories => this.setState({stories}));
+            .then(stories => this.setState({ stories }));
     }
 
     render() {
-
+        // console.log(this.state.stories)
+        const { stories } = this.state
         return (
             <div >
                 <ul>
-                    {this.state.stories.map((story) =>
-                        <li key={story.id}>
-                            {story.title}
-                        </li>
-                    )}
+                    <li>
+                        {stories.map((story, i) => {
+                            return (
+                                <StoryView
+                                    key={i}
+                                    story={story}
+                                />
+                            );
+                        })}
+                    </li>
+
                 </ul>
             </div >
         )
