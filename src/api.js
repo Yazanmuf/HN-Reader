@@ -8,3 +8,7 @@ export const fetchTopStoryIds = (limit = 10) => fetch(ENDPOINT + 'topstories.jso
 export const fetchStory = id => fetch(ENDPOINT + `item/${id}.json`).then(r => r.json());
 
 export const fetchStories = ids => Promise.all(ids.map(id => fetchStory(id)));
+
+export const fetchComment = id => fetch(ENDPOINT + `item/${id}.json`).then(r => r.json());
+
+export const fetchComments = ids => Promise.all(ids.map(id => fetchComment(id)));
