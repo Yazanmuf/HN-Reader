@@ -12,18 +12,23 @@ class Comments extends Component {
     }
 
 
-    //Figure this out! getting a list of all the comments, how to create a function that loops through them all then adds them to component state
     componentDidMount() {
         const arrayOfComments = this.props.comments;
-        console.log('component did mount should see list of comments', arrayOfComments);
-        arrayOfComments.map(id => API.fetchComment(id).then(result => console.log(result)))
-        // this.setState({ comments: arrayOfComments })
+        //Added this console.log and a bunch of things worked. I suspect it's because of asynchronous stuff happening in the parent container. 
+        console.log(arrayOfComments)
+        const textOfComments = [];
+        // console.log('component did mount should see list of comments', arrayOfComments);
+        arrayOfComments.map(id => API.fetchComment(id).then(result => textOfComments.push(result)))
+        this.setState({ comments: textOfComments })
     }
 
     render() {
+        //Looks like the comment list only has the first comment and NOT it's kids. will resolve this in individual comment component. 
         const { comments } = this.state
+        console.log('RENDER COMMENT LIST OF EACH STORY', comments)
         return (
-            < p > comments go here</p >
+            <p>comment goes here</p>
+            // < p > {comments[0].text}</p >
         )
     }
 }
