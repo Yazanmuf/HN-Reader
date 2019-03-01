@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Comment from './Comment';
+import Comments from './Comments';
 
 const StoryView = props => {
     console.log(props)
@@ -11,7 +11,7 @@ const StoryView = props => {
             <p><b>Author:</b> {props.story.by}</p>
             <p><b>url: </b>{props.story.url}</p>
             <br />
-            <Comment comments={props.story.kids} />
+            <Comments comments={props.story.kids} />
 
         </div>
     )

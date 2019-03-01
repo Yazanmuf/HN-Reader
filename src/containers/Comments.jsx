@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as API from '../api';
 
-class Comment extends Component {
+class Comments extends Component {
 
     constructor(props) {
         super(props);
@@ -10,11 +10,14 @@ class Comment extends Component {
             comments: []
         };
     }
+
+
     //Figure this out! getting a list of all the comments, how to create a function that loops through them all then adds them to component state
     componentDidMount() {
-        console.log('component did mount should see list of comments', this.props.comments);
-        const arrayOfComments = Promise.all(this.props.comments.map(id => API.fetchComment(id)))
-        this.setState({ comments: arrayOfComments })
+        const arrayOfComments = this.props.comments;
+        console.log('component did mount should see list of comments', arrayOfComments);
+        arrayOfComments.map(id => API.fetchComment(id).then(result => console.log(result)))
+        // this.setState({ comments: arrayOfComments })
     }
 
     render() {
@@ -26,4 +29,4 @@ class Comment extends Component {
 }
 
 
-export default Comment;
+export default Comments;
